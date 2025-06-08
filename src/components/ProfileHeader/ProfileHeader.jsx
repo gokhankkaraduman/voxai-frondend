@@ -1,16 +1,18 @@
 import React, { useState } from 'react';
 import { FaUser, FaEdit, FaCamera, FaEnvelope, FaCalendar, FaMapMarkerAlt } from 'react-icons/fa';
+import { useUser } from '../../contexts/UserContext';
 import style from './ProfileHeader.module.css';
 
 const ProfileHeader = () => {
   const [isEditing, setIsEditing] = useState(false);
+  const { user, updateUserProfile } = useUser();
   const [userInfo, setUserInfo] = useState({
-    name: 'John Doe',
-    email: 'john.doe@example.com',
-    bio: 'Passionate reader and audiobook enthusiast. Love exploring new worlds through stories.',
-    location: 'San Francisco, CA',
-    joinDate: 'January 2023',
-    avatar: null
+    name: user.name,
+    email: user.email,
+    bio: user.bio,
+    location: user.location,
+    joinDate: user.joinDate,
+    avatar: user.avatar
   });
 
   const handleEditToggle = () => {
@@ -19,8 +21,8 @@ const ProfileHeader = () => {
 
   const handleSave = () => {
     setIsEditing(false);
-    // Here you would save to backend
-    console.log('Saving user info:', userInfo);
+    // Update global state with toast notification
+    updateUserProfile(userInfo);
   };
 
   const handleInputChange = (field, value) => {

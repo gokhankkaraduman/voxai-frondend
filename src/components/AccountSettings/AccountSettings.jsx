@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useUser } from '../../contexts/UserContext';
 import { 
   FaLock, 
   FaBell, 
@@ -15,6 +16,7 @@ import {
 import style from './AccountSettings.module.css';
 
 const AccountSettings = () => {
+  const { user, updateUserProfile, updateSettings } = useUser();
   const [settings, setSettings] = useState({
     // Privacy Settings
     profileVisibility: 'public',
@@ -50,9 +52,9 @@ const AccountSettings = () => {
   });
 
   const [accountData, setAccountData] = useState({
-    email: 'john.doe@example.com',
-    username: 'johndoe',
-    phone: '+1 (555) 123-4567'
+    email: user.email,
+    username: user.username,
+    phone: user.phone
   });
 
   const handleSettingToggle = (setting) => {
@@ -91,9 +93,9 @@ const AccountSettings = () => {
   };
 
   const handleSaveChanges = () => {
-    console.log('Saving settings:', settings);
-    console.log('Account data:', accountData);
-    // Here you would save to backend
+    // Update global state with toast notification
+    updateUserProfile(accountData);
+    updateSettings('account', settings);
   };
 
   const handlePasswordUpdate = () => {

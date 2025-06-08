@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useUser } from '../../contexts/UserContext';
 import { 
   FaPalette,
   FaVolumeUp,
@@ -15,6 +16,7 @@ import {
 import style from './Preferences.module.css';
 
 const Preferences = () => {
+  const { updatePreferences } = useUser();
   const [preferences, setPreferences] = useState({
     // Reading Preferences
     readingSpeed: 'normal',
@@ -77,8 +79,8 @@ const Preferences = () => {
   };
 
   const handleSave = () => {
-    console.log('Saving preferences:', preferences);
-    // Here you would save to backend/localStorage
+    // Update global state with toast notification
+    updatePreferences(preferences);
   };
 
   const playbackSpeeds = [0.5, 0.75, 1.0, 1.25, 1.5, 1.75, 2.0];

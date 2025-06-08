@@ -1,19 +1,10 @@
 import React from 'react';
 import { FaBook, FaClock, FaHeadphones, FaFire, FaTrophy, FaCalendarDay } from 'react-icons/fa';
+import { useUser } from '../../contexts/UserContext';
 import style from './ReadingStats.module.css';
 
 const ReadingStats = () => {
-  // Mock data - will be replaced with real data from backend
-  const stats = {
-    totalBooks: 24,
-    totalHours: 156,
-    currentStreak: 7,
-    booksThisMonth: 3,
-    avgPerWeek: 2.5,
-    favoriteGenre: 'Science Fiction',
-    longestSession: '4h 32m',
-    completionRate: 89
-  };
+  const { readingStats: stats } = useUser();
 
   const recentActivity = [
     { date: '2024-01-15', book: 'Atomic Habits', duration: '2h 15m', completed: false },

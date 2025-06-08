@@ -1,18 +1,13 @@
 import { FaPlay, FaFileAlt, FaStar, FaBookOpen, FaHeart, FaArrowRight } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import { useUser } from '../../contexts/UserContext';
 import style from './PopularBooks.module.css';
 
 const PopularBooks = () => {
   const navigate = useNavigate();
-  const [favorites, setFavorites] = useState([]);
-  const [isLoggedIn, setIsLoggedIn] = useState(true); // This will be replaced with actual auth context later
-
-  // Load favorites from localStorage on component mount
-  useEffect(() => {
-    const storedFavorites = JSON.parse(localStorage.getItem('favorites') || '[]');
-    setFavorites(storedFavorites);
-  }, []);
+  const { user, favorites, addToFavorites, removeFromFavorites, isFavorite } = useUser();
+  const isLoggedIn = user.isLoggedIn;
 
   // Mock data - will be replaced with backend API later
   const popularBooks = [
@@ -95,12 +90,10 @@ const PopularBooks = () => {
     const book = popularBooks.find(b => b.id === bookId);
     if (!book) return;
 
-    const isCurrentlyFavorited = favorites.some(fav => fav.id === bookId);
+    const isCurrentlyFavorited = isFavorite(bookId);
     
-    let updatedFavorites;
     if (isCurrentlyFavorited) {
-      // Remove from favorites
-      updatedFavorites = favorites.filter(fav => fav.id !== bookId);
+      removeFromFavorites(bookId);
     } else {
       // Add to favorites with complete book data
       const completeBookData = {
@@ -109,22 +102,19 @@ const PopularBooks = () => {
         author: book.author,
         genre: book.genre,
         rating: book.rating,
-        reviewCount: Math.floor(Math.random() * 2000) + 500, // Mock review count
+        reviewCount: Math.floor(Math.random() * 2000) + 500,
         cover: book.cover,
         description: book.description,
         longDescription: book.description + " This book offers deep insights and practical wisdom that readers find transformative and engaging.",
         duration: book.duration,
-        chapters: Math.floor(Math.random() * 20) + 10, // Mock chapters
-        publishYear: 2020 + Math.floor(Math.random() * 4), // Mock year
-        isbn: "978-" + Math.random().toString().substr(2, 10), // Mock ISBN
+        chapters: Math.floor(Math.random() * 20) + 10,
+        publishYear: 2020 + Math.floor(Math.random() * 4),
+        isbn: "978-" + Math.random().toString().substr(2, 10),
         language: "English",
         summary: "This book provides valuable insights on " + book.genre.toLowerCase() + " and offers practical strategies that can be applied in daily life."
       };
-      updatedFavorites = [...favorites, completeBookData];
+      addToFavorites(completeBookData);
     }
-    
-    setFavorites(updatedFavorites);
-    localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
   };
 
   return (
@@ -155,7 +145,7 @@ const PopularBooks = () => {
                 {isLoggedIn && (
                   <button 
                     className={`${style.favoriteButton} ${
-                      favorites.some(fav => fav.id === book.id) ? style.favorited : ''
+                      isFavorite(book.id) ? style.favorited : ''
                     }`}
                     onClick={() => handleFavorite(book.id)}
                   >

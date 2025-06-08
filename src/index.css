@@ -156,3 +156,16 @@ body::after {
 ::-webkit-scrollbar-thumb:hover {
   background: linear-gradient(135deg, #4f46e5, #7c3aed);
 }
+
+/* Toast Notifications Override */
+[data-testid="toast"] {
+  z-index: 999999999 !important;
+}
+
+.react-hot-toast-wrapper {
+  z-index: 999999999 !important;
+}
+
+.react-hot-toast {
+  z-index: 999999999 !important;
+}

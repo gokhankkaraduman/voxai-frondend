@@ -1,28 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FaPlay, FaFileAlt, FaStar, FaBookOpen, FaHeart, FaTrash } from 'react-icons/fa';
+import { useUser } from '../../contexts/UserContext';
 import style from './Favorites.module.css';
 
 const Favorites = () => {
-  const [favorites, setFavorites] = useState([]);
-  const [isLoggedIn, setIsLoggedIn] = useState(true); // This will be replaced with actual auth context later
+  const { user, favorites, removeFromFavorites } = useUser();
   const navigate = useNavigate();
+  const isLoggedIn = user.isLoggedIn;
 
   useEffect(() => {
     if (!isLoggedIn) {
       navigate('/login');
       return;
     }
-
-    // Load favorites from localStorage
-    const storedFavorites = JSON.parse(localStorage.getItem('favorites') || '[]');
-    setFavorites(storedFavorites);
   }, [isLoggedIn, navigate]);
 
   const handleRemoveFromFavorites = (bookId) => {
-    const updatedFavorites = favorites.filter(book => book.id !== bookId);
-    setFavorites(updatedFavorites);
-    localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
+    removeFromFavorites(bookId);
   };
 
   const handleListen = (bookId) => {
