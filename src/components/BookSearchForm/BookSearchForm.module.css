@@ -1,0 +1,669 @@
+/* Book Search Form - Modern Design */
+.formContainer {
+  position: relative;
+  margin: 4rem auto 4rem;
+  max-width: 1200px;
+  padding: 0;
+}
+
+.formWrapper {
+  position: relative;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 4rem 1.5rem 3rem;
+  box-shadow: 
+    0 8px 30px rgba(0, 0, 0, 0.12),
+    0 4px 12px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+}
+
+.formWrapper::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, 
+    rgba(99, 102, 241, 0.03) 0%, 
+    rgba(139, 92, 246, 0.02) 50%, 
+    rgba(236, 72, 153, 0.03) 100%);
+  border-radius: 24px;
+  z-index: -1;
+}
+
+/* Form Header */
+.formHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 3rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.headerLeft {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.headerIcon {
+  font-size: 2rem;
+  color: rgba(255, 255, 255, 0.9);
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-3px); }
+}
+
+.formTitle {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: white;
+  margin: 0;
+}
+
+.formSubtitle {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0;
+}
+
+/* Form Layout */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* Ana Arama Alanı */
+.mainSearchGroup {
+  position: relative;
+}
+
+.inputWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.inputIcon {
+  position: absolute;
+  left: 1.5rem;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 1.1rem;
+  z-index: 2;
+}
+
+.mainInput {
+  width: 100%;
+  padding: 1.25rem 1.5rem 1.25rem 3.5rem;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  color: white;
+  font-size: 1.1rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.mainInput:focus {
+  outline: none;
+  border-color: #6366f1;
+  box-shadow: 
+    0 0 0 3px rgba(99, 102, 241, 0.2),
+    0 8px 25px rgba(99, 102, 241, 0.15);
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.mainInput::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* Gelişmiş Filtreler */
+.filtersSection {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 2rem;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.filtersHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 600;
+}
+
+.filterIcon {
+  color: #8b5cf6;
+  font-size: 1rem;
+}
+
+.filtersGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+/* Force ALL inputs in inputGroup to be same height */
+.inputGroup input,
+.inputGroup select,
+.inputGroup > div,
+.inputGroup > div > input {
+  height: 48px !important;
+  min-height: 48px !important;
+  max-height: 48px !important;
+  box-sizing: border-box !important;
+}
+
+.label {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-bottom: 0.25rem;
+}
+
+.textInput,
+.selectInput {
+  padding: 1rem 1.25rem;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  color: white;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  height: 48px;
+  box-sizing: border-box;
+}
+
+.selectInput {
+  padding-right: 2.5rem;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='rgba(255,255,255,0.5)' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+  background-position: right 0.75rem center;
+  background-repeat: no-repeat;
+  background-size: 1.25rem;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+/* Remove number input spinners */
+.textInput[type="number"]::-webkit-outer-spin-button,
+.textInput[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.textInput[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.textInput:focus,
+.selectInput:focus {
+  outline: none;
+  border-color: #8b5cf6;
+  box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.2);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.textInput::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.selectInput option {
+  background: rgba(30, 41, 59, 0.95);
+  color: white;
+}
+
+/* Year Picker Styles */
+.yearPickerWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 48px !important;
+  min-height: 48px !important;
+  width: 100% !important;
+}
+
+.yearPickerWrapper > div {
+  width: 100% !important;
+  height: 48px !important;
+}
+
+.yearPickerWrapper input {
+  height: 48px !important;
+  min-height: 48px !important;
+  max-height: 48px !important;
+  line-height: 48px !important;
+  box-sizing: border-box !important;
+}
+
+.calendarIcon {
+  position: absolute;
+  left: 1rem;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.9rem;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.yearPicker {
+  width: 100% !important;
+  padding: 1rem 1.25rem 1rem 2.5rem !important;
+  background: rgba(255, 255, 255, 0.06) !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  border-radius: 12px !important;
+  color: white !important;
+  font-size: 0.95rem !important;
+  transition: all 0.3s ease !important;
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+  cursor: pointer !important;
+  height: 48px !important;
+  min-height: 48px !important;
+  max-height: 48px !important;
+  line-height: 48px !important;
+  box-sizing: border-box !important;
+}
+
+.yearPicker:focus {
+  outline: none !important;
+  border-color: #8b5cf6 !important;
+  box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.2) !important;
+  background: rgba(255, 255, 255, 0.1) !important;
+}
+
+.yearPicker::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+/* DatePicker Input Override - FORCE SAME SIZE */
+:global(.react-datepicker__input-container input) {
+  height: 48px !important;
+  min-height: 48px !important;
+  max-height: 48px !important;
+  box-sizing: border-box !important;
+  line-height: 48px !important;
+  padding: 1rem 1.25rem 1rem 2.5rem !important;
+  background: rgba(255, 255, 255, 0.06) !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  border-radius: 12px !important;
+  color: white !important;
+  font-size: 0.95rem !important;
+  transition: all 0.3s ease !important;
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+}
+
+/* Extra force for DatePicker specifically */
+:global(.react-datepicker__input-container) {
+  height: 48px !important;
+  width: 100% !important;
+}
+
+:global(.react-datepicker__input-container input[placeholder*="year"]) {
+  height: 48px !important;
+  min-height: 48px !important;
+  max-height: 48px !important;
+  line-height: 48px !important;
+}
+
+/* ULTIMATE FORCE - Every possible DatePicker input selector */
+:global(input[placeholder="Publication year"]) {
+  height: 48px !important;
+  min-height: 48px !important;
+  max-height: 48px !important;
+  line-height: 48px !important;
+  padding: 1rem 1.25rem 1rem 2.5rem !important;
+  background: rgba(255, 255, 255, 0.06) !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  border-radius: 12px !important;
+  color: white !important;
+  font-size: 0.95rem !important;
+  box-sizing: border-box !important;
+}
+
+:global(.react-datepicker__input-container input),
+:global(input.react-datepicker__input),
+:global(div[class*="yearPicker"] input) {
+  height: 48px !important;
+  min-height: 48px !important;
+  max-height: 48px !important;
+  line-height: 48px !important;
+  padding: 1rem 1.25rem 1rem 2.5rem !important;
+  box-sizing: border-box !important;
+}
+
+/* DatePicker Global Styles */
+:global(.react-datepicker) {
+  background: linear-gradient(145deg, rgba(15, 23, 42, 0.98) 0%, rgba(30, 41, 59, 0.95) 100%) !important;
+  border: 1px solid rgba(99, 102, 241, 0.3) !important;
+  border-radius: 24px !important;
+  box-shadow: 
+    0 25px 60px rgba(0, 0, 0, 0.6),
+    0 15px 30px rgba(99, 102, 241, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1) !important;
+  backdrop-filter: blur(25px) !important;
+  -webkit-backdrop-filter: blur(25px) !important;
+  font-family: inherit !important;
+  width: 320px !important;
+  overflow: hidden !important;
+}
+
+:global(.react-datepicker__header) {
+  background: linear-gradient(135deg, 
+    rgba(99, 102, 241, 0.15) 0%, 
+    rgba(139, 92, 246, 0.15) 50%, 
+    rgba(236, 72, 153, 0.15) 100%) !important;
+  border-bottom: 1px solid rgba(99, 102, 241, 0.2) !important;
+  border-radius: 24px 24px 0 0 !important;
+  padding: 1.5rem !important;
+  position: relative !important;
+}
+
+:global(.react-datepicker__header::before) {
+  content: '' !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  background: linear-gradient(135deg, 
+    rgba(99, 102, 241, 0.08) 0%, 
+    rgba(139, 92, 246, 0.08) 50%, 
+    rgba(236, 72, 153, 0.08) 100%) !important;
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+}
+
+:global(.react-datepicker__current-month) {
+  color: #ffffff !important;
+  font-weight: 700 !important;
+  font-size: 1.2rem !important;
+  margin: 0 !important;
+  text-align: center !important;
+  letter-spacing: 1px !important;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
+  background: linear-gradient(135deg, #ffffff 0%, #e2e8f0 100%) !important;
+  background-clip: text !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  position: relative !important;
+  z-index: 10 !important;
+}
+
+:global(.react-datepicker__year-wrapper) {
+  display: grid !important;
+  grid-template-columns: repeat(3, 1fr) !important;
+  gap: 1rem !important;
+  padding: 1.5rem !important;
+  max-height: none !important;
+  overflow: visible !important;
+  background: rgba(0, 0, 0, 0.1) !important;
+  border-radius: 0 0 24px 24px !important;
+}
+
+:global(.react-datepicker__year-text) {
+  color: white !important;
+  padding: 1rem 0.75rem !important;
+  border-radius: 16px !important;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  border: 1px solid rgba(99, 102, 241, 0.2) !important;
+  background: linear-gradient(135deg, 
+    rgba(255, 255, 255, 0.08) 0%, 
+    rgba(255, 255, 255, 0.04) 100%) !important;
+  text-align: center !important;
+  cursor: pointer !important;
+  font-weight: 600 !important;
+  font-size: 0.95rem !important;
+  height: 48px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+:global(.react-datepicker__year-text:hover) {
+  background: linear-gradient(135deg, 
+    rgba(99, 102, 241, 0.15) 0%, 
+    rgba(139, 92, 246, 0.15) 100%) !important;
+  border-color: rgba(99, 102, 241, 0.6) !important;
+  transform: translateY(-2px) scale(1.02) !important;
+  box-shadow: 0 8px 25px rgba(99, 102, 241, 0.25) !important;
+}
+
+:global(.react-datepicker__year-text--selected) {
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%) !important;
+  color: white !important;
+  border-color: #6366f1 !important;
+  font-weight: 700 !important;
+  box-shadow: 
+    0 10px 30px rgba(99, 102, 241, 0.4),
+    0 4px 12px rgba(139, 92, 246, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
+  transform: scale(1.05) !important;
+}
+
+:global(.react-datepicker__navigation) {
+  border: none !important;
+  width: 2.5rem !important;
+  height: 2.5rem !important;
+  border-radius: 50% !important;
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #ec4899 100%) !important;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  top: 1.25rem !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  box-shadow: 
+    0 6px 20px rgba(99, 102, 241, 0.35),
+    0 3px 10px rgba(139, 92, 246, 0.25) !important;
+  z-index: 20 !important;
+}
+
+:global(.react-datepicker__navigation:hover) {
+  background: linear-gradient(135deg, #7c3aed 0%, #a855f7 50%, #f472b6 100%) !important;
+  transform: scale(1.15) !important;
+  box-shadow: 
+    0 10px 30px rgba(124, 58, 237, 0.5),
+    0 5px 15px rgba(168, 85, 247, 0.35) !important;
+}
+
+:global(.react-datepicker__navigation--previous) {
+  left: 1.25rem !important;
+}
+
+:global(.react-datepicker__navigation--next) {
+  right: 1.25rem !important;
+}
+
+:global(.react-datepicker__navigation-icon::before) {
+  border-color: #ffffff !important;
+  border-width: 2.5px 2.5px 0 0 !important;
+  width: 8px !important;
+  height: 8px !important;
+}
+
+:global(.react-datepicker__year-option) {
+  color: white !important;
+}
+
+:global(.react-datepicker__year-option:hover) {
+  background-color: rgba(99, 102, 241, 0.2) !important;
+}
+
+/* Submit Button */
+.submitButton {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 2rem;
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #ec4899 100%);
+  border: none;
+  border-radius: 12px;
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 
+    0 6px 20px rgba(99, 102, 241, 0.3),
+    0 3px 10px rgba(139, 92, 246, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.submitButton::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.6s ease;
+}
+
+.submitButton:hover::before {
+  left: 100%;
+}
+
+.submitButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 
+    0 12px 35px rgba(99, 102, 241, 0.4),
+    0 6px 18px rgba(139, 92, 246, 0.3);
+}
+
+.submitButton:active {
+  transform: translateY(0);
+}
+
+.submitButton:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Error Messages */
+.errorMessage {
+  color: #f87171;
+  font-size: 0.85rem;
+  margin-top: 0.5rem;
+  padding-left: 0.5rem;
+  font-weight: 500;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .formContainer {
+    padding: 0 1rem;
+    margin-top: 2rem;
+  }
+  
+  .formWrapper {
+    padding: 2rem;
+  }
+  
+  .formTitle {
+    font-size: 1.5rem;
+  }
+  
+  .filtersGrid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .mainInput {
+    padding: 1rem 1rem 1rem 3rem;
+    font-size: 1rem;
+  }
+  
+  .submitButton {
+    padding: 1rem 2rem;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .formWrapper {
+    padding: 1.5rem;
+  }
+  
+  .formHeader {
+    margin-bottom: 2rem;
+  }
+  
+  .headerIcon {
+    font-size: 1.5rem;
+  }
+  
+  .formTitle {
+    font-size: 1.25rem;
+  }
+  
+  .filtersSection {
+    padding: 1.5rem;
+  }
+}
+
+/* ULTIMATE FORCE FOR PUBLICATION YEAR INPUT - MUST BE SAME SIZE */
+:global(input[placeholder="Publication year"]) {
+  height: 48px !important;
+  min-height: 48px !important;
+  max-height: 48px !important;
+  line-height: 48px !important;
+  padding: 1rem 1.25rem 1rem 2.5rem !important;
+  background: rgba(255, 255, 255, 0.06) !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  border-radius: 12px !important;
+  color: white !important;
+  font-size: 0.95rem !important;
+  box-sizing: border-box !important;
+}
+
+:global(.react-datepicker__input-container input),
+:global(input.react-datepicker__input),
+:global(div[class*="yearPicker"] input) {
+  height: 48px !important;
+  min-height: 48px !important;
+  max-height: 48px !important;
+  line-height: 48px !important;
+  padding: 1rem 1.25rem 1rem 2.5rem !important;
+  box-sizing: border-box !important;
+}
+
+/* Force ALL inputs in inputGroup to be same height */
+.inputGroup input,
+.inputGroup select,
+.inputGroup > div,
+.inputGroup > div > input {
+  height: 48px !important;
+  min-height: 48px !important;
+  max-height: 48px !important;
+  box-sizing: border-box !important;
+} 
