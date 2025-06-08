@@ -1,8 +1,9 @@
 import { NavLink, useNavigate } from "react-router";
 import { useState, useRef, useEffect } from "react";
+import { useUser } from "../../contexts/UserContext";
 import logo from '../../assets/logo/logo.png'
 import style from './Header.module.css'
-import { FaHome, FaBook, FaCog, FaPalette, FaGlobe, FaBell, FaUser, FaSignOutAlt, FaUserCog, FaHeart } from "react-icons/fa";
+import { FaHome, FaBook, FaCog, FaPalette, FaGlobe, FaBell, FaUser, FaSignOutAlt, FaUserCog, FaHeart, FaComments } from "react-icons/fa";
 import { MdSecurity } from "react-icons/md";
 import { FaPeopleGroup } from "react-icons/fa6";
 import { IoMdLogIn } from "react-icons/io";
@@ -12,10 +13,15 @@ function Header() {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [isSettingsOpen, setIsSettingsOpen] = useState(false);
     const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
+
     const settingsRef = useRef(null);
     const userMenuRef = useRef(null);
     const navigate = useNavigate();
-    const isLoggedIn = true; // Demo için true yapıyorum
+    const { user } = useUser();
+    const isLoggedIn = user.isLoggedIn;
+    
+    // Sadece ilk ismi al (soyisim olmadan)
+    const firstName = user.name ? user.name.split(' ')[0] : 'User';
 
     const toggleMobileMenu = () => {
         setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -30,6 +36,8 @@ function Header() {
         setIsUserMenuOpen(!isUserMenuOpen);
         setIsSettingsOpen(false); // Diğer menüyü kapat
     };
+
+
 
     const handleNavigation = (path) => {
         navigate(path);
@@ -139,14 +147,14 @@ function Header() {
                                 <div className={style.userAvatar}>
                                     <FaUser />
                                 </div>
-                                <span className={style.userName}>John Doe</span>
+                                <span className={style.userName}>{firstName}</span>
                             </button>
                             
                             <div className={`${style.userMenuDropdown} ${isUserMenuOpen ? style.open : ''}`}>
                                 <div className={style.userMenuHeader}>
                                     <div className={style.userInfo}>
-                                        <strong>John Doe</strong>
-                                        <span>john@example.com</span>
+                                        <strong>{user.name}</strong>
+                                        <span>{user.email}</span>
                                     </div>
                                 </div>
                                 <div className={style.userMenuItem} onClick={() => handleNavigation('/profile')}>
@@ -161,7 +169,7 @@ function Header() {
                                     <FaCog />
                                     Preferences
                                 </div>
-                                <div className={style.userMenuItem} onClick={() => handleNavigation('/privacy')}>
+                                <div className={style.userMenuItem} onClick={() => handleNavigation('/profile?tab=settings')}>
                                     <MdSecurity />
                                     Privacy Settings
                                 </div>
@@ -178,6 +186,17 @@ function Header() {
                         </div>
                     )}
                     
+                    {/* Messages Button (Only if logged in) */}
+                    {isLoggedIn && (
+                        <button 
+                            className={style.messagesButton}
+                            onClick={() => handleNavigation('/messages')}
+                            aria-label="Messages"
+                        >
+                            <FaComments />
+                        </button>
+                    )}
+                    
                     {/* Settings Menu (Theme & Language) */}
                     <div className={style.settingsContainer} ref={settingsRef}>
                         <button 
@@ -185,7 +204,7 @@ function Header() {
                             onClick={toggleSettings}
                             aria-label="Settings menu"
                         >
-                            <FaCog /> Settings
+                            <FaCog />
                         </button>
                         
                         <div className={`${style.settingsDropdown} ${isSettingsOpen ? style.open : ''}`}>
@@ -282,10 +301,10 @@ function Header() {
                                 <FaCog />
                                 <span>Preferences</span>
                             </div>
-                            <NavLink to="/privacy" className={style.mobileUserItem} onClick={() => setIsMobileMenuOpen(false)}>
+                            <div className={style.mobileUserItem} onClick={() => handleNavigation('/profile?tab=settings')}>
                                 <MdSecurity />
-                                <span>Privacy</span>
-                            </NavLink>
+                                <span>Privacy Settings</span>
+                            </div>
                             <NavLink to="/notifications" className={style.mobileUserItem} onClick={() => setIsMobileMenuOpen(false)}>
                                 <FaBell />
                                 <span>Notifications</span>
@@ -309,6 +328,8 @@ function Header() {
                     </div>
                 </div>
             </div>
+            
+
         </header>
     );
 }
