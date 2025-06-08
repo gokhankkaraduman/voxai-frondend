@@ -1,0 +1,297 @@
+.container {
+  background: linear-gradient(145deg, 
+    rgba(255, 255, 255, 0.1) 0%, 
+    rgba(255, 255, 255, 0.05) 100%);
+  border: 1px solid rgba(99, 102, 241, 0.25);
+  border-radius: 20px;
+  padding: 2rem;
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.2),
+    0 4px 16px rgba(99, 102, 241, 0.15);
+  margin-bottom: 2rem;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.title {
+  color: white;
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(135deg, #ffffff 0%, #e2e8f0 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.subtitle {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 1rem;
+  margin: 0;
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.statCard {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.statCard:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(99, 102, 241, 0.3);
+  transform: translateY(-2px);
+}
+
+.statIcon {
+  width: 50px;
+  height: 50px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1.4rem;
+  flex-shrink: 0;
+}
+
+.statContent {
+  flex: 1;
+}
+
+.statNumber {
+  color: white;
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0 0 0.25rem 0;
+  line-height: 1;
+}
+
+.statLabel {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.9rem;
+  margin: 0;
+  font-weight: 500;
+}
+
+.goalSection {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.goalTitle {
+  color: white;
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin: 0 0 1rem 0;
+}
+
+.goalProgress {
+  width: 100%;
+}
+
+.goalInfo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.9rem;
+}
+
+.goalPercentage {
+  font-weight: 600;
+  color: #10b981;
+}
+
+.progressBar {
+  width: 100%;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  background: linear-gradient(90deg, #10b981 0%, #34d399 100%);
+  border-radius: 4px;
+  transition: width 0.3s ease;
+}
+
+.additionalStats {
+  margin-bottom: 2rem;
+}
+
+.additionalGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.additionalItem {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.additionalItem:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(99, 102, 241, 0.3);
+}
+
+.additionalIcon {
+  color: #6366f1;
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+.additionalLabel {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.85rem;
+  margin: 0 0 0.25rem 0;
+}
+
+.additionalValue {
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.activitySection {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 1.5rem;
+}
+
+.activityTitle {
+  color: white;
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin: 0 0 1rem 0;
+}
+
+.activityList {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.activityItem {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+.activityItem:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(99, 102, 241, 0.2);
+}
+
+.activityDate {
+  color: #6366f1;
+  font-size: 0.85rem;
+  font-weight: 600;
+  min-width: 60px;
+  text-align: center;
+  padding: 0.5rem;
+  background: rgba(99, 102, 241, 0.1);
+  border-radius: 8px;
+}
+
+.activityContent {
+  flex: 1;
+}
+
+.activityBook {
+  color: white;
+  font-weight: 600;
+  margin: 0 0 0.25rem 0;
+  font-size: 0.95rem;
+}
+
+.activityDuration {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+.activityStatus {
+  padding: 0.4rem 0.8rem;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-align: center;
+  min-width: 80px;
+}
+
+.activityStatus.completed {
+  background: rgba(16, 185, 129, 0.2);
+  color: #10b981;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.activityStatus.inProgress {
+  background: rgba(245, 158, 11, 0.2);
+  color: #f59e0b;
+  border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .container {
+    padding: 1.5rem;
+  }
+  
+  .statsGrid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .additionalGrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .activityItem {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+  
+  .activityDate {
+    align-self: flex-start;
+  }
+} 
