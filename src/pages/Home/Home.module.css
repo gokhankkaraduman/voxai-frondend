@@ -9,9 +9,9 @@
 /* Hero Section */
 .heroSection {
   position: relative;
-  margin: 3rem auto 0;
+  margin: 4rem auto 0;
   max-width: 1200px;
-  padding: 6rem 1.5rem;
+  padding: 4rem 1.5rem 3rem;
   text-align: center;
   z-index: 1;
   background: rgba(255, 255, 255, 0.05);
@@ -88,7 +88,12 @@
 /* Responsive Design */
 @media (max-width: 768px) {
   .container {
-    padding: 1rem;
+    padding: 0 1rem;
+  }
+  
+  .heroSection {
+    padding: 2rem 1rem;
+    margin-top: 2rem;
   }
   
   .heroTitle {
@@ -99,25 +104,21 @@
     font-size: 1rem;
   }
   
-  .heroSection {
-    padding: 4rem 2rem;
-  }
-  
   .heroContent {
     max-width: 100%;
   }
 }
 
 @media (max-width: 480px) {
+  .heroSection {
+    padding: 1.5rem 1rem;
+  }
+  
   .heroTitle {
     font-size: 2rem;
   }
   
   .heroSubtitle {
     font-size: 1rem;
-  }
-  
-  .heroSection {
-    padding: 2.5rem 1rem;
   }
 }

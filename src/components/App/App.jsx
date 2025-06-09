@@ -11,6 +11,10 @@ import BookDetail from '../../pages/BookDetail/BookDetail.jsx'
 import Favorites from '../../pages/Favorites/Favorites.jsx'
 import Profile from '../../pages/Profile/Profile.jsx'
 import Messages from '../../pages/Messages/Messages.jsx'
+import Community from '../../pages/Community/Community.jsx'
+import Notifications from '../../pages/Notifications/Notifications.jsx'
+import Books from '../../pages/Books/Books.jsx'
+import BookReader from '../../pages/BookReader/BookReader.jsx'
 
 function App() {
   return (
@@ -20,10 +24,12 @@ function App() {
         <main className="main-content">
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/books" element={<div style={{padding: '120px 2rem 4rem', textAlign: 'center', color: '#64748b', minHeight: '60vh'}}>Books Page Coming Soon</div>} />
+            <Route path="/books" element={<Books />} />
+            <Route path="/books/:bookId" element={<BookDetail />} />
+            <Route path="/books/:bookId/read" element={<BookReader />} />
             <Route path="/book/:bookId" element={<BookDetail />} />
             <Route path="/favorites" element={<Favorites />} />
-            <Route path="/community" element={<div style={{padding: '120px 2rem 4rem', textAlign: 'center', color: '#64748b', minHeight: '60vh'}}>Community Page Coming Soon</div>} />
+            <Route path="/community" element={<Community />} />
             <Route path="/login" element={<div style={{padding: '120px 2rem 4rem', textAlign: 'center', color: '#64748b', minHeight: '60vh'}}>Login Page Coming Soon</div>} />
             <Route path="/register" element={<div style={{padding: '120px 2rem 4rem', textAlign: 'center', color: '#64748b', minHeight: '60vh'}}>Register Page Coming Soon</div>} />
             <Route path="/help" element={<Help />} />
@@ -32,7 +38,7 @@ function App() {
           <Route path="/messages" element={<Messages />} />
           <Route path="/account" element={<div style={{padding: '120px 2rem 4rem', textAlign: 'center', color: '#64748b', minHeight: '60vh'}}>Account Settings Coming Soon</div>} />
             <Route path="/privacy" element={<div style={{padding: '120px 2rem 4rem', textAlign: 'center', color: '#64748b', minHeight: '60vh'}}>Privacy Settings Coming Soon</div>} />
-            <Route path="/notifications" element={<div style={{padding: '120px 2rem 4rem', textAlign: 'center', color: '#64748b', minHeight: '60vh'}}>Notification Settings Coming Soon</div>} />
+            <Route path="/notifications" element={<Notifications />} />
             <Route path="/terms" element={<div style={{padding: '120px 2rem 4rem', textAlign: 'center', color: '#64748b', minHeight: '60vh'}}>Terms of Service Coming Soon</div>} />
             <Route path="/contact" element={<div style={{padding: '120px 2rem 4rem', textAlign: 'center', color: '#64748b', minHeight: '60vh'}}>Contact Page Coming Soon</div>} />
           </Routes>

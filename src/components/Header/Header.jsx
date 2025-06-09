@@ -8,6 +8,7 @@ import { MdSecurity } from "react-icons/md";
 import { FaPeopleGroup } from "react-icons/fa6";
 import { IoMdLogIn } from "react-icons/io";
 import { RiUserAddLine } from "react-icons/ri";
+import { HiMenu, HiX } from "react-icons/hi";
 
 function Header() {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -36,8 +37,6 @@ function Header() {
         setIsUserMenuOpen(!isUserMenuOpen);
         setIsSettingsOpen(false); // Diğer menüyü kapat
     };
-
-
 
     const handleNavigation = (path) => {
         navigate(path);
@@ -69,7 +68,8 @@ function Header() {
                 
                 <div className={style.logoContainer}>
                     <img src={logo} alt="VoxAi Logo" className={style.logoImg} />
-                    <h1 className={style.logoText}>
+                    {/* Desktop'ta logo text görünür, mobile'da gizli */}
+                    <h1 className={`${style.logoText} ${style.desktopOnly}`}>
                         Vox<span className={style.logoSpan}>Ai</span>
                     </h1>
                 </div>
@@ -147,7 +147,8 @@ function Header() {
                                 <div className={style.userAvatar}>
                                     <FaUser />
                                 </div>
-                                <span className={style.userName}>{firstName}</span>
+                                {/* Mobile'da sadece avatar, desktop'ta isim de var */}
+                                <span className={`${style.userName} ${style.desktopOnly}`}>{firstName}</span>
                             </button>
                             
                             <div className={`${style.userMenuDropdown} ${isUserMenuOpen ? style.open : ''}`}>
@@ -225,7 +226,7 @@ function Header() {
                         onClick={toggleMobileMenu}
                         aria-label="Toggle navigation menu"
                     >
-                        {isMobileMenuOpen ? '✕' : '☰'}
+                        {isMobileMenuOpen ? <HiX /> : <HiMenu />}
                     </button>
                 </div>
             </div>
@@ -240,6 +241,7 @@ function Header() {
                         }
                         onClick={() => setIsMobileMenuOpen(false)}
                     >
+                        <FaHome />
                         Home
                     </NavLink>
                     <NavLink 
@@ -249,6 +251,7 @@ function Header() {
                         }
                         onClick={() => setIsMobileMenuOpen(false)}
                     >
+                        <FaBook />
                         Books
                     </NavLink>
                     <NavLink 
@@ -258,8 +261,33 @@ function Header() {
                         }
                         onClick={() => setIsMobileMenuOpen(false)}
                     >
+                        <FaPeopleGroup />
                         Community
                     </NavLink>
+                    {isLoggedIn && (
+                        <>
+                            <NavLink 
+                                to="/favorites" 
+                                className={({ isActive }) => 
+                                    isActive ? `${style.mobileNavItem} ${style.active}` : style.mobileNavItem
+                                }
+                                onClick={() => setIsMobileMenuOpen(false)}
+                            >
+                                <FaHeart />
+                                Favorites
+                            </NavLink>
+                            <NavLink 
+                                to="/messages" 
+                                className={({ isActive }) => 
+                                    isActive ? `${style.mobileNavItem} ${style.active}` : style.mobileNavItem
+                                }
+                                onClick={() => setIsMobileMenuOpen(false)}
+                            >
+                                <FaComments />
+                                Messages
+                            </NavLink>
+                        </>
+                    )}
                     {!isLoggedIn && (
                         <>
                             <NavLink 
@@ -269,6 +297,7 @@ function Header() {
                             }
                             onClick={() => setIsMobileMenuOpen(false)}
                             >
+                                <IoMdLogIn />
                                 Login
                             </NavLink>
                             <NavLink 
@@ -278,6 +307,7 @@ function Header() {
                             }
                             onClick={() => setIsMobileMenuOpen(false)}
                             >
+                                <RiUserAddLine />
                                 Register
                             </NavLink>
                         </>
@@ -293,22 +323,26 @@ function Header() {
                                 <FaUser />
                                 <span>Profile</span>
                             </NavLink>
+                            <NavLink to="/favorites" className={style.mobileUserItem} onClick={() => setIsMobileMenuOpen(false)}>
+                                <FaHeart />
+                                <span>Favorites</span>
+                            </NavLink>
                             <div className={style.mobileUserItem} onClick={() => handleNavigation('/profile?tab=settings')}>
                                 <FaUserCog />
-                                <span>Account Settings</span>
+                                <span>Settings</span>
                             </div>
                             <div className={style.mobileUserItem} onClick={() => handleNavigation('/profile?tab=preferences')}>
                                 <FaCog />
                                 <span>Preferences</span>
                             </div>
-                            <div className={style.mobileUserItem} onClick={() => handleNavigation('/profile?tab=settings')}>
-                                <MdSecurity />
-                                <span>Privacy Settings</span>
-                            </div>
                             <NavLink to="/notifications" className={style.mobileUserItem} onClick={() => setIsMobileMenuOpen(false)}>
                                 <FaBell />
                                 <span>Notifications</span>
                             </NavLink>
+                            <div className={style.mobileUserItem} onClick={() => console.log('Logout')}>
+                                <FaSignOutAlt />
+                                <span>Logout</span>
+                            </div>
                         </div>
                     </div>
                 )}

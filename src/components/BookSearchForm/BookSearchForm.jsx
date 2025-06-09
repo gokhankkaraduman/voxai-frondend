@@ -1,6 +1,7 @@
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { useState } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import DatePicker from 'react-datepicker';
 import { FaSearch, FaBook, FaFilter, FaCalendarAlt } from 'react-icons/fa';
 import style from './BookSearchForm.module.css';
@@ -8,6 +9,8 @@ import 'react-datepicker/dist/react-datepicker.css';
 
 const BookSearchForm = () => {
   const [selectedYear, setSelectedYear] = useState(null);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const validationSchema = Yup.object({
     searchTerm: Yup.string()
@@ -32,8 +35,17 @@ const BookSearchForm = () => {
       ...values,
       year: selectedYear ? selectedYear.getFullYear() : values.year
     };
+    
     console.log('Searching for:', formData);
-    // Here search API will be called
+    
+    // If we're on Books page, call the search function directly
+    if (location.pathname === '/books' && window.handleBooksSearch) {
+      window.handleBooksSearch(formData);
+    } else {
+      // Navigate to books page with search params
+      navigate('/books', { state: { searchData: formData } });
+    }
+    
     setTimeout(() => {
       setSubmitting(false);
     }, 1000);
@@ -54,14 +66,6 @@ const BookSearchForm = () => {
                   <FaBook className={style.headerIcon} />
                   <h2 className={style.formTitle}>Find Your Next Book</h2>
                 </div>
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className={style.submitButton}
-                >
-                  <FaSearch />
-                  {isSubmitting ? 'Searching...' : 'Search Books'}
-                </button>
               </div>
 
               {/* Main Search Field */}
@@ -88,13 +92,16 @@ const BookSearchForm = () => {
                       className={style.selectInput}
                     >
                       <option value="">All Categories</option>
-                      <option value="fiction">Fiction</option>
-                      <option value="non-fiction">Non-Fiction</option>
-                      <option value="science-fiction">Science Fiction</option>
-                      <option value="history">History</option>
-                      <option value="philosophy">Philosophy</option>
-                      <option value="science">Science</option>
-                      <option value="art">Art</option>
+                      <option value="Finance">Finance</option>
+                      <option value="Self Development">Self Development</option>
+                      <option value="History">History</option>
+                      <option value="Fiction">Fiction</option>
+                      <option value="Biography">Biography</option>
+                      <option value="Science Fiction">Science Fiction</option>
+                      <option value="Romance">Romance</option>
+                      <option value="Mystery">Mystery</option>
+                      <option value="Fantasy">Fantasy</option>
+                      <option value="Thriller">Thriller</option>
                     </Field>
                   </div>
 
@@ -128,6 +135,18 @@ const BookSearchForm = () => {
                     <ErrorMessage name="year" component="div" className={style.errorMessage} />
                   </div>
                 </div>
+              </div>
+
+              {/* Submit Button */}
+              <div className={style.submitContainer}>
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className={style.submitButton}
+                >
+                  <FaSearch />
+                  {isSubmitting ? 'Searching...' : 'Search Books'}
+                </button>
               </div>
             </Form>
           )}

@@ -38,16 +38,19 @@
 /* Form Header */
 .formHeader {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-  margin-bottom: 3rem;
+  justify-content: center;
+  margin-bottom: 2rem;
   padding-bottom: 1rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  text-align: center;
 }
 
 .headerLeft {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 1rem;
 }
 
@@ -514,6 +517,13 @@
 
 :global(.react-datepicker__year-option:hover) {
   background-color: rgba(99, 102, 241, 0.2) !important;
+}
+
+/* Submit Container */
+.submitContainer {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
 }
 
 /* Submit Button */
