@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useUser } from '../../contexts/UserContext';
 import { 
   FaPalette,
@@ -27,6 +27,7 @@ const Preferences = () => {
     
     // Audio Preferences
     playbackSpeed: 1.0,
+    speechRate: 1.0, // TTS için
     voiceGender: 'female',
     audioQuality: 'high',
     skipSilence: true,
@@ -59,32 +60,54 @@ const Preferences = () => {
     backgroundPlay: true
   });
 
+  // Sync with UserContext preferences when they change
+  useEffect(() => {
+    if (userPreferences) {
+      setPreferences(userPreferences);
+    }
+  }, [userPreferences]);
+
   const handlePreferenceChange = (key, value) => {
+    console.log(`🔧 Setting ${key} to:`, value);
     setPreferences(prev => ({
       ...prev,
       [key]: value
     }));
+    // Artık otomatik kaydetmiyor - sadece local state güncelleniyor
   };
 
   const handleToggle = (key) => {
+    const newValue = !preferences[key];
+    console.log(`🔧 Toggling ${key} to:`, newValue);
     setPreferences(prev => ({
       ...prev,
-      [key]: !prev[key]
+      [key]: newValue
     }));
+    // Artık otomatik kaydetmiyor - sadece local state güncelleniyor
   };
 
   const handleGenreToggle = (genre) => {
+    const newGenres = preferences.preferredGenres.includes(genre)
+      ? preferences.preferredGenres.filter(g => g !== genre)
+      : [...preferences.preferredGenres, genre];
+      
     setPreferences(prev => ({
       ...prev,
-      preferredGenres: prev.preferredGenres.includes(genre)
-        ? prev.preferredGenres.filter(g => g !== genre)
-        : [...prev.preferredGenres, genre]
+      preferredGenres: newGenres
     }));
+    // Artık otomatik kaydetmiyor - sadece local state güncelleniyor
   };
 
   const handleSave = () => {
-    // Update global state with toast notification
+    // Sadece burada kaydet
+    console.log('💾 Saving all preferences:', preferences);
     updatePreferences(preferences);
+  };
+
+  // Audio için speechRate ekleyelim
+  const handleSpeechRateChange = (value) => {
+    handlePreferenceChange('speechRate', value);
+    handlePreferenceChange('playbackSpeed', value); // Her ikisini de güncelle
   };
 
   const playbackSpeeds = [0.5, 0.75, 1.0, 1.25, 1.5, 1.75, 2.0];
@@ -195,17 +218,17 @@ const Preferences = () => {
       <div className={style.section}>
         <h3 className={style.sectionTitle}>
           <FaVolumeUp />
-          Audio Preferences
+          TTS Audio Preferences
         </h3>
         <div className={style.preferenceGrid}>
           <div className={style.preferenceItem}>
             <div className={style.preferenceInfo}>
-              <h4>Playback Speed</h4>
-              <p>Audio playback speed multiplier</p>
+              <h4>Speech Rate / Speed</h4>
+              <p>Text-to-speech speed multiplier</p>
             </div>
             <select
-              value={preferences.playbackSpeed}
-              onChange={(e) => handlePreferenceChange('playbackSpeed', parseFloat(e.target.value))}
+              value={preferences.speechRate || preferences.playbackSpeed}
+              onChange={(e) => handleSpeechRateChange(parseFloat(e.target.value))}
               className={style.select}
             >
               {playbackSpeeds.map(speed => (
@@ -216,8 +239,8 @@ const Preferences = () => {
 
           <div className={style.preferenceItem}>
             <div className={style.preferenceInfo}>
-              <h4>Preferred Voice</h4>
-              <p>AI voice gender preference</p>
+              <h4>Voice Gender</h4>
+              <p>TTS voice gender preference</p>
             </div>
             <select
               value={preferences.voiceGender}
