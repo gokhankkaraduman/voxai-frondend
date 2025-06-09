@@ -11,75 +11,167 @@ import {
   MdSpeed 
 } from 'react-icons/md';
 import booksData from '../../data/books.json';
+import { useUser } from '../../contexts/UserContext';
 import style from './BookReader.module.css';
 
 const BookReader = () => {
   const { bookId } = useParams();
   const navigate = useNavigate();
+  const { preferences } = useUser();
+  
   const [book, setBook] = useState(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentSentence, setCurrentSentence] = useState(0);
   const [sentences, setSentences] = useState([]);
+  const [voices, setVoices] = useState([]);
+  
   const isPlayingRef = useRef(false);
+  const speechRef = useRef(null);
+  const timeoutRef = useRef(null);
 
-  // Settings
-  const [settings, setSettings] = useState({
+  // TTS Settings
+  const [ttsSettings, setTtsSettings] = useState({
     rate: 1.0,
     volume: 1.0,
-    fontSize: 18
+    pitch: 1.0,
+    voiceGender: 'neutral',
+    fontSize: 18,
+    fontFamily: 'Inter',
+    highlightColor: '#6366f1',
+    sentencePause: 200
   });
+
+  // Preferences update
+  useEffect(() => {
+    if (preferences) {
+      console.log('🔄 Preferences changed!', preferences);
+      const newSettings = {
+        rate: preferences.speechRate || preferences.playbackSpeed || 1.0,
+        volume: preferences.speechVolume || 1.0,
+        pitch: preferences.speechPitch || 1.0,
+        voiceGender: preferences.voiceGender || 'neutral',
+        fontSize: preferences.fontSize === 'small' ? 16 : 
+                  preferences.fontSize === 'medium' ? 18 :
+                  preferences.fontSize === 'large' ? 22 :
+                  preferences.fontSize === 'xl' ? 26 : 18,
+        fontFamily: preferences.fontFamily || 'Inter',
+        highlightColor: preferences.highlightColor || '#6366f1',
+        sentencePause: preferences.sentencePause || 200
+      };
+      console.log('✅ Settings updated:', newSettings);
+      setTtsSettings(newSettings);
+    }
+  }, [preferences]);
+
+  // Cleanup
+  useEffect(() => {
+    return () => {
+      speechSynthesis.cancel();
+      isPlayingRef.current = false;
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    };
+  }, []);
 
   // Load book
   useEffect(() => {
     const foundBook = booksData.books.find(b => b.id === parseInt(bookId));
     if (foundBook) {
       setBook(foundBook);
-      
-      // Combine all chapters into one continuous text
       const fullText = foundBook.chapters.map(chapter => chapter.text).join(' ');
-      
-      // Split into sentences
       const sentenceArray = fullText.match(/[^\.!?]+[\.!?]+/g) || [fullText];
       setSentences(sentenceArray.map(s => s.trim()));
       setCurrentSentence(0);
-      
-      console.log(`📚 Loaded ${sentenceArray.length} sentences`);
+      console.log(`📚 ${sentenceArray.length} sentences loaded`);
     } else {
       toast.error('Book not found');
       navigate('/books');
     }
   }, [bookId, navigate]);
 
-  // Speak sentence
+  // Load voices
+  useEffect(() => {
+    const loadVoices = () => {
+      const availableVoices = speechSynthesis.getVoices();
+      setVoices(availableVoices);
+      console.log(`🎤 ${availableVoices.length} voices loaded`);
+      console.log('Available voices:', availableVoices.map(v => `${v.name} (${v.lang})`));
+    };
+    loadVoices();
+    speechSynthesis.onvoiceschanged = loadVoices;
+    setTimeout(loadVoices, 1000);
+  }, []);
+
+  // Voice selection
+  const selectVoice = () => {
+    if (voices.length === 0) return null;
+    
+    const { voiceGender } = ttsSettings;
+    let selectedVoice = null;
+    
+    console.log(`🎤 Searching ${voiceGender} voice...`);
+    
+    if (voiceGender === 'male') {
+      selectedVoice = voices.find(v => 
+        v.name.toLowerCase().includes('alex') ||
+        v.name.toLowerCase().includes('daniel') ||
+        v.name.toLowerCase().includes('david') ||
+        v.name.toLowerCase().includes('fred') ||
+        v.name.toLowerCase().includes('male')
+      );
+    } else if (voiceGender === 'female') {
+      selectedVoice = voices.find(v => 
+        v.name.toLowerCase().includes('samantha') ||
+        v.name.toLowerCase().includes('victoria') ||
+        v.name.toLowerCase().includes('susan') ||
+        v.name.toLowerCase().includes('elena') ||
+        v.name.toLowerCase().includes('female')
+      );
+    }
+    
+    const finalVoice = selectedVoice || voices.find(v => v.lang.startsWith('en')) || voices[0];
+    console.log(`✅ Selected: ${finalVoice?.name} for ${voiceGender}`);
+    return finalVoice;
+  };
+
+  // TTS with auto-continue
   const speakSentence = (index) => {
     if (!sentences[index] || !isPlayingRef.current) return;
 
     console.log(`🔊 Speaking sentence ${index + 1}/${sentences.length}`);
     speechSynthesis.cancel();
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
 
     setTimeout(() => {
       if (!isPlayingRef.current) return;
 
       const utterance = new SpeechSynthesisUtterance(sentences[index]);
-      utterance.rate = settings.rate;
-      utterance.volume = settings.volume;
+      const selectedVoice = selectVoice();
+      
+      if (selectedVoice) utterance.voice = selectedVoice;
+      utterance.rate = ttsSettings.rate;
+      utterance.volume = ttsSettings.volume;
+      utterance.pitch = ttsSettings.pitch;
+
+      let hasEnded = false;
 
       utterance.onstart = () => {
         console.log(`✅ Started sentence ${index + 1}`);
       };
 
       utterance.onend = () => {
+        if (hasEnded) return;
+        hasEnded = true;
         console.log(`🏁 Finished sentence ${index + 1}`);
         
-        // Auto continue
         if (isPlayingRef.current && index < sentences.length - 1) {
-          setTimeout(() => {
+          console.log(`➡️ Continuing to sentence ${index + 2}`);
+          timeoutRef.current = setTimeout(() => {
             if (isPlayingRef.current) {
               setCurrentSentence(index + 1);
               speakSentence(index + 1);
             }
-          }, 200);
-        } else {
+          }, ttsSettings.sentencePause || 200);
+        } else if (index >= sentences.length - 1) {
           setIsPlaying(false);
           isPlayingRef.current = false;
           toast.success('Reading completed! 🎉');
@@ -87,27 +179,37 @@ const BookReader = () => {
       };
 
       utterance.onerror = (event) => {
-        if (event.error !== 'canceled') {
-          console.log('Speech error:', event.error);
+        console.error(`❌ TTS Error:`, event.error);
+        if (event.error !== 'canceled' && isPlayingRef.current && !hasEnded) {
+          hasEnded = true;
+          timeoutRef.current = setTimeout(() => {
+            if (isPlayingRef.current && index < sentences.length - 1) {
+              setCurrentSentence(index + 1);
+              speakSentence(index + 1);
+            }
+          }, 500);
         }
       };
 
+      speechRef.current = utterance;
       speechSynthesis.speak(utterance);
     }, 100);
   };
 
-  // Controls
   const play = () => {
     if (sentences.length === 0) return;
+    console.log('▶️ Starting reading');
     setIsPlaying(true);
     isPlayingRef.current = true;
     speakSentence(currentSentence);
   };
 
   const stop = () => {
+    console.log('⏹️ Stopping reading');
     speechSynthesis.cancel();
     setIsPlaying(false);
     isPlayingRef.current = false;
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
     setCurrentSentence(0);
   };
 
@@ -119,7 +221,6 @@ const BookReader = () => {
     }
   };
 
-  // Auto scroll
   useEffect(() => {
     const currentElement = document.querySelector(`[data-sentence="${currentSentence}"]`);
     if (currentElement) {
@@ -131,14 +232,13 @@ const BookReader = () => {
     return (
       <div className={style.loading}>
         <div className={style.loadingSpinner}></div>
-        <p>Loading book...</p>
+        <p>Loading...</p>
       </div>
     );
   }
 
   return (
     <div className={style.container}>
-      {/* Header */}
       <motion.div 
         className={style.header}
         initial={{ opacity: 0, y: -20 }}
@@ -153,37 +253,65 @@ const BookReader = () => {
         <div className={style.bookInfo}>
           <h2 className={style.bookTitle}>{book.title}</h2>
           <p className={style.progress}>
-            Sentence {currentSentence + 1} of {sentences.length}
+            Sentence {currentSentence + 1} / {sentences.length}
           </p>
         </div>
       </motion.div>
 
-      {/* Content */}
       <motion.div 
         className={style.content}
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
+        style={{
+          '--current-highlight-color': ttsSettings.highlightColor,
+          '--current-highlight-color-shadow': `${ttsSettings.highlightColor}66`, // 40% opacity
+          '--current-font-size': `${ttsSettings.fontSize}px`,
+          '--current-font-family': ttsSettings.fontFamily
+        }}
       >
         <div 
           className={style.textContainer}
-          style={{ fontSize: `${settings.fontSize}px` }}
+          style={{ 
+            fontSize: `${ttsSettings.fontSize}px`,
+            fontFamily: ttsSettings.fontFamily,
+            lineHeight: '1.6'
+          }}
         >
           {sentences.map((sentence, index) => {
             const isCurrentSentence = index === currentSentence;
-            const isReadSentence = index < currentSentence;
             
             return (
               <span
-                key={index}
+                key={`sentence-${index}`}
                 data-sentence={index}
-                className={`${style.sentence} ${
-                  isCurrentSentence ? style.currentSentence : ''
-                } ${isReadSentence ? style.readSentence : ''}`}
+                className={style.sentence}
                 onClick={() => {
+                  console.log(`📍 Clicked sentence ${index + 1}`);
                   setCurrentSentence(index);
-                  if (isPlaying) {
-                    speakSentence(index);
+                  
+                  if (isPlaying && isPlayingRef.current) {
+                    speechSynthesis.cancel();
+                    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+                    setTimeout(() => {
+                      if (isPlayingRef.current) {
+                        speakSentence(index);
+                      }
+                    }, 100);
                   }
+                }}
+                style={{
+                  backgroundColor: isCurrentSentence ? ttsSettings.highlightColor : 'transparent',
+                  color: isCurrentSentence ? '#ffffff' : 'inherit',
+                  fontWeight: isCurrentSentence ? '700' : 'normal',
+                  padding: isCurrentSentence ? '0.4rem 0.6rem' : '0.1rem 0.2rem',
+                  borderRadius: isCurrentSentence ? '8px' : '4px',
+                  margin: '0.1rem',
+                  display: 'inline-block',
+                  cursor: 'pointer',
+                  transition: 'all 0.3s ease',
+                  boxShadow: isCurrentSentence ? `0 4px 12px ${ttsSettings.highlightColor}80` : 'none',
+                  transform: isCurrentSentence ? 'scale(1.02)' : 'scale(1)',
+                  animation: isCurrentSentence ? 'pulse 2s infinite' : 'none'
                 }}
               >
                 {sentence}{' '}
@@ -193,7 +321,6 @@ const BookReader = () => {
         </div>
       </motion.div>
 
-      {/* Controls */}
       <motion.div 
         className={style.audioControls}
         initial={{ opacity: 0, y: 20 }}
@@ -206,7 +333,6 @@ const BookReader = () => {
           >
             {isPlaying ? <MdPause /> : <MdPlayArrow />}
           </button>
-
           <button className={style.controlBtn} onClick={stop}>
             <MdStop />
           </button>
@@ -215,45 +341,40 @@ const BookReader = () => {
         <div className={style.settingsRow}>
           <div className={style.settingGroup}>
             <MdSpeed />
-            <input
-              type="range"
-              min="0.5"
-              max="2"
-              step="0.1"
-              value={settings.rate}
-              onChange={(e) => setSettings(prev => ({ ...prev, rate: parseFloat(e.target.value) }))}
-            />
-            <span>{settings.rate}x</span>
+            <span>Speed: {ttsSettings.rate}x</span>
           </div>
-
           <div className={style.settingGroup}>
             <MdVolumeUp />
-            <input
-              type="range"
-              min="0"
-              max="1"
-              step="0.1"
-              value={settings.volume}
-              onChange={(e) => setSettings(prev => ({ ...prev, volume: parseFloat(e.target.value) }))}
-            />
+            <span>Volume: {Math.round(ttsSettings.volume * 100)}%</span>
           </div>
-
           <div className={style.settingGroup}>
-            <span>Font</span>
-            <input
-              type="range"
-              min="14"
-              max="28"
-              step="2"
-              value={settings.fontSize}
-              onChange={(e) => setSettings(prev => ({ ...prev, fontSize: parseInt(e.target.value) }))}
-            />
-            <span>{settings.fontSize}px</span>
+            <span>Font: {ttsSettings.fontSize}px</span>
           </div>
+          <div className={style.settingGroup}>
+            <span>Family: {ttsSettings.fontFamily}</span>
+          </div>
+          <div className={style.settingGroup}>
+            <span>Voice: {ttsSettings.voiceGender}</span>
+          </div>
+          <div className={style.settingGroup}>
+            <span style={{ 
+              backgroundColor: ttsSettings.highlightColor, 
+              color: 'white', 
+              padding: '2px 6px', 
+              borderRadius: '4px',
+              fontSize: '12px'
+            }}>
+              Color
+            </span>
+          </div>
+        </div>
+
+        <div className={style.preferencesNote}>
+          <small>💡 Change settings in Profile → Preferences</small>
         </div>
       </motion.div>
     </div>
   );
 };
 
-export default BookReader;
+export default BookReader; 
