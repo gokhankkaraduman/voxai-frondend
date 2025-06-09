@@ -16,8 +16,8 @@ import {
 import style from './Preferences.module.css';
 
 const Preferences = () => {
-  const { updatePreferences } = useUser();
-  const [preferences, setPreferences] = useState({
+  const { preferences: userPreferences, updatePreferences } = useUser();
+  const [preferences, setPreferences] = useState(userPreferences || {
     // Reading Preferences
     readingSpeed: 'normal',
     autoPlayNext: false,
@@ -30,6 +30,10 @@ const Preferences = () => {
     voiceGender: 'female',
     audioQuality: 'high',
     skipSilence: true,
+    speechPitch: 1.0,
+    speechVolume: 1.0,
+    continuousReading: true,
+    sentencePause: 200,
     
     // Display Preferences
     theme: 'dark',
@@ -253,6 +257,70 @@ const Preferences = () => {
             >
               {preferences.skipSilence ? <FaToggleOn /> : <FaToggleOff />}
             </button>
+          </div>
+
+          <div className={style.preferenceItem}>
+            <div className={style.preferenceInfo}>
+              <h4>Speech Pitch</h4>
+              <p>Voice pitch adjustment (0.5 - 2.0)</p>
+            </div>
+            <input
+              type="range"
+              min="0.5"
+              max="2.0"
+              step="0.1"
+              value={preferences.speechPitch || 1.0}
+              onChange={(e) => handlePreferenceChange('speechPitch', parseFloat(e.target.value))}
+              className={style.rangeInput}
+            />
+            <span className={style.rangeValue}>{preferences.speechPitch || 1.0}</span>
+          </div>
+
+          <div className={style.preferenceItem}>
+            <div className={style.preferenceInfo}>
+              <h4>Speech Volume</h4>
+              <p>Voice volume level (0.0 - 1.0)</p>
+            </div>
+            <input
+              type="range"
+              min="0.0"
+              max="1.0"
+              step="0.1"
+              value={preferences.speechVolume || 1.0}
+              onChange={(e) => handlePreferenceChange('speechVolume', parseFloat(e.target.value))}
+              className={style.rangeInput}
+            />
+            <span className={style.rangeValue}>{Math.round((preferences.speechVolume || 1.0) * 100)}%</span>
+          </div>
+
+          <div className={style.preferenceItem}>
+            <div className={style.preferenceInfo}>
+              <h4>Continuous Reading</h4>
+              <p>Automatically continue to next sentence</p>
+            </div>
+            <button
+              onClick={() => handleToggle('continuousReading')}
+              className={style.toggle}
+            >
+              {preferences.continuousReading !== false ? <FaToggleOn /> : <FaToggleOff />}
+            </button>
+          </div>
+
+          <div className={style.preferenceItem}>
+            <div className={style.preferenceInfo}>
+              <h4>Sentence Pause Duration</h4>
+              <p>Pause between sentences (milliseconds)</p>
+            </div>
+            <input
+              type="range"
+              min="100"
+              max="1000"
+              step="50"
+              value={preferences.sentencePause || 200}
+              onChange={(e) => handlePreferenceChange('sentencePause', parseInt(e.target.value))}
+              className={style.rangeInput}
+            />
+            <span className={style.rangeValue}>{preferences.sentencePause || 200}ms</span>
           </div>
         </div>
       </div>
