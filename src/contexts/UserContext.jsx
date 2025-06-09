@@ -57,6 +57,57 @@ export const UserProvider = ({ children }) => {
     completionRate: 89
   });
 
+  // User preferences state with localStorage
+  const [preferences, setPreferences] = useState(() => {
+    const savedPreferences = localStorage.getItem('voxai_preferences');
+    return savedPreferences ? JSON.parse(savedPreferences) : {
+      // Reading Preferences
+      readingSpeed: 'normal',
+      autoPlayNext: false,
+      rememberPosition: true,
+      sleepTimer: false,
+      defaultSleepTime: 30,
+      
+      // Audio Preferences
+      playbackSpeed: 1.0,
+      voiceGender: 'female',
+      audioQuality: 'high',
+      skipSilence: true,
+      speechPitch: 1.0,
+      speechVolume: 1.0,
+      continuousReading: true,
+      sentencePause: 200,
+      
+      // Display Preferences
+      theme: 'dark',
+      fontSize: 'medium',
+      fontFamily: 'Inter',
+      highlightColor: '#6366f1',
+      
+      // Language & Region
+      language: 'en',
+      region: 'US',
+      timeFormat: '12h',
+      dateFormat: 'MM/DD/YYYY',
+      
+      // Content Preferences
+      preferredGenres: ['fiction', 'science'],
+      contentRating: 'all',
+      showExplicitContent: true,
+      
+      // Advanced Settings
+      preloadChapters: true,
+      offlineMode: false,
+      dataSaver: false,
+      backgroundPlay: true
+    };
+  });
+
+  // Save preferences to localStorage whenever they change
+  useEffect(() => {
+    localStorage.setItem('voxai_preferences', JSON.stringify(preferences));
+  }, [preferences]);
+
   // User actions with toast notifications
   const updateUserProfile = (updates) => {
     const previousUser = { ...user };
@@ -223,7 +274,8 @@ export const UserProvider = ({ children }) => {
     });
   };
 
-  const updatePreferences = (preferences) => {
+  const updatePreferences = (newPreferences) => {
+    setPreferences(prev => ({ ...prev, ...newPreferences }));
     toast.success('Preferences saved! 🎨', {
       duration: 2000,
       position: 'top-right',
@@ -248,6 +300,7 @@ export const UserProvider = ({ children }) => {
     user,
     favorites,
     readingStats,
+    preferences,
     
     // User actions
     updateUserProfile,
