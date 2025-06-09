@@ -1,0 +1,232 @@
+{
+  "books": [
+    {
+      "id": 1,
+      "title": "The Mystery of Silent Valley",
+      "author": "Eleanor Shaw",
+      "cover": "https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=400&h=600&fit=crop",
+      "description": "A thrilling mystery novel that takes readers through the enigmatic Silent Valley, where secrets lie buried beneath ancient trees. Detective Sarah Mitchell uncovers a web of deceit that spans generations.",
+      "genre": "Mystery",
+      "duration": "8h 45m",
+      "rating": 4.8,
+      "reviews": 1247,
+      "pages": 324,
+      "publishYear": 2023,
+      "publisher": "Mystery House Publishing",
+      "isbn": "978-0-123456-78-9",
+      "language": "English",
+      "isAudioAvailable": true,
+      "isFavorite": false,
+      "tags": ["mystery", "detective", "thriller", "crime"],
+      "currentProgress": {
+        "chapter": 0,
+        "sentence": 0,
+        "percentage": 0
+      },
+      "chapters": [
+        {
+          "id": 1,
+          "title": "Chapter 1: The Arrival",
+          "duration": "45m",
+          "text": "The morning mist clung to the valley like a shroud, obscuring the ancient oaks that had stood sentinel for centuries. Detective Sarah Mitchell stepped out of her car, breathing in the crisp mountain air that carried whispers of secrets long buried. Silent Valley had earned its name not from tranquility, but from the eerie quiet that seemed to swallow sound itself. She had come here following a lead in the Blackwood case - a mystery that had haunted her for months. The local sheriff, a weathered man named Tom Bradley, approached with cautious steps. 'Detective Mitchell,' he greeted, his voice barely above a whisper as if speaking too loudly might disturb whatever presence lingered in these woods. 'Thank you for coming. We've found something you need to see.' As they walked deeper into the valley, Sarah noticed how even their footsteps seemed muffled, absorbed by the moss-covered ground that sparkled with morning dew. The trees seemed to lean inward, creating a natural tunnel that led toward the heart of the mystery. Each step took them further from the safety of the known world and deeper into a realm where the past refused to stay buried."
+        },
+        {
+          "id": 2,
+          "title": "Chapter 2: The Discovery",
+          "duration": "52m",
+          "text": "The discovery lay hidden beneath a canopy of intertwined branches, a structure that defied explanation. Sheriff Bradley led Sarah to what appeared to be an ancient stone circle, its weathered markers arranged in a pattern that spoke of deliberate design. 'We found this yesterday,' he explained, gesturing toward the center where the earth had been recently disturbed. 'Local hikers reported strange sounds coming from this area - voices, they said, though no one was around.' Sarah knelt beside the disturbed earth, her trained eye catching details others might miss. The soil was different here, darker, as if it had been turned over recently but by hands that knew exactly what they were doing. Small fragments of pottery lay scattered around the site, their surfaces etched with symbols that predated any known local civilization. 'Have you contacted the archaeological department?' Sarah asked, though her detective instincts told her this was more than just an ancient burial ground. The air itself seemed charged with an energy that made the hair on her arms stand on end."
+        },
+        {
+          "id": 3,
+          "title": "Chapter 3: Whispers in the Dark",
+          "duration": "48m",
+          "text": "As night fell over Silent Valley, Sarah found herself unable to shake the feeling that she was being watched. The local inn where she had taken a room overlooked the valley, and from her window, she could see strange lights flickering between the trees. The innkeeper, an elderly woman named Mrs. Hartwell, brought her tea and lingered by the window. 'You're not the first outsider to come asking questions about the valley,' she said quietly. 'But you might be the first to actually listen to the answers.' Mrs. Hartwell spoke of old legends, of families who had vanished without a trace, and of sounds that echoed through the valley on moonless nights. 'The Blackwood family,' she whispered, 'they knew the truth. That's why they had to disappear.' Sarah felt a chill run down her spine as she realized that the case she thought she was solving might be just the beginning of something far more sinister."
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Journey Through Time",
+      "author": "Marcus Chen",
+      "cover": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=600&fit=crop",
+      "description": "An epic science fiction adventure spanning multiple timelines and dimensions. Dr. Elena Vasquez discovers that time itself is not what it seems, leading to a quest that will reshape reality.",
+      "genre": "Sci-Fi",
+      "duration": "12h 20m",
+      "rating": 4.6,
+      "reviews": 892,
+      "pages": 456,
+      "publishYear": 2022,
+      "publisher": "Future Worlds Press",
+      "isbn": "978-0-234567-89-0",
+      "language": "English",
+      "isAudioAvailable": true,
+      "isFavorite": false,
+      "tags": ["sci-fi", "time-travel", "adventure", "space"],
+      "currentProgress": {
+        "chapter": 0,
+        "sentence": 0,
+        "percentage": 0
+      },
+      "chapters": [
+        {
+          "id": 1,
+          "title": "Chapter 1: The Time Rift",
+          "duration": "55m",
+          "text": "Dr. Elena Vasquez stared at the impossible readings on her quantum computer screen. The temporal displacement field she had been studying for years was fluctuating in patterns that defied every law of physics she knew. 'This can't be right,' she murmured, adjusting the sensors for the third time that morning. The laboratory hummed with the energy of dozens of advanced machines, each one designed to probe the very fabric of time itself. Her research partner, Dr. James Wright, looked up from his own console with concern etched across his weathered features. 'Elena, you need to see this. The temporal readings are spiking beyond anything we've recorded.' The implications hit her like a wave - if their calculations were correct, they had stumbled upon evidence of a natural time rift, a phenomenon that could revolutionize their understanding of the universe. But as Elena studied the data more closely, she began to realize that this discovery might be more dangerous than revolutionary. The rift wasn't just showing them the past - it was actively pulling pieces of different timelines into their present reality."
+        },
+        {
+          "id": 2,
+          "title": "Chapter 2: Echoes of Tomorrow",
+          "duration": "58m",
+          "text": "The first sign that something had gone terribly wrong was the appearance of a newspaper dated three months in the future. Elena found it on her desk, its headlines describing events that hadn't happened yet - or perhaps events that were happening in a parallel timeline. The lead story spoke of a scientific breakthrough that would change the world forever, credited to Dr. Elena Vasquez. She felt a chill as she recognized her own research, but presented in ways she had never imagined. 'James,' she called out, but when she turned around, her partner looked different - older, with graying hair and tired eyes. 'Elena,' he said, his voice carrying a weight of years, 'we've been trying to reach you across the timelines. The rift is expanding, and if we don't find a way to stabilize it soon, it will tear apart the very fabric of reality.' Elena realized with growing horror that she wasn't just observing time travel - she was living it, jumping between different versions of her own life with each passing moment."
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Hearts in Harmony",
+      "author": "Isabella Rodriguez",
+      "cover": "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=400&h=600&fit=crop",
+      "description": "A heartwarming romance about two musicians who find love through their shared passion for music. Maya and Alex discover that sometimes the most beautiful melodies come from two hearts beating as one.",
+      "genre": "Romance",
+      "duration": "6h 30m",
+      "rating": 4.4,
+      "reviews": 1567,
+      "pages": 289,
+      "publishYear": 2023,
+      "publisher": "Love Stories Publishing",
+      "isbn": "978-0-345678-90-1",
+      "language": "English",
+      "isAudioAvailable": true,
+      "isFavorite": true,
+      "tags": ["romance", "music", "love", "contemporary"],
+      "currentProgress": {
+        "chapter": 0,
+        "sentence": 0,
+        "percentage": 0
+      },
+      "chapters": [
+        {
+          "id": 1,
+          "title": "Chapter 1: The Coffee Shop Melody",
+          "duration": "40m",
+          "text": "The gentle notes of a piano drifted through the cozy coffee shop, weaving between the conversations and the soft hiss of the espresso machine. Maya Chen looked up from her sheet music, captivated by the impromptu performance. The musician, a tall man with dark hair and focused eyes, seemed lost in his own world as his fingers danced across the keys. She had been struggling with her own composition for weeks, but something about his melody sparked inspiration in her heart. 'Excuse me,' she found herself saying as he finished the piece, 'that was beautiful. Did you write it yourself?' He turned, offering a shy smile that made her heart skip a beat. 'I'm Alex,' he said simply, 'and thank you. Music has always been my way of speaking when words aren't enough.' Maya felt an immediate connection, as if the melody he had played was somehow meant for her ears alone. 'I'm Maya,' she replied, gesturing to her own scattered sheet music. 'I'm a composer too, though I'm afraid I'm not having much luck today.' Alex glanced at her work with genuine interest. 'May I?' he asked, and when she nodded, he sat down beside her, close enough that she could smell the faint scent of his cologne mixed with the coffee shop's warm atmosphere."
+        },
+        {
+          "id": 2,
+          "title": "Chapter 2: Duet of Souls",
+          "duration": "45m",
+          "text": "Three weeks had passed since their first meeting, and Maya found herself returning to the coffee shop every day, hoping to hear Alex play again. Their friendship had blossomed over shared musical discussions and collaborative compositions. Today, Alex had brought his guitar, and as Maya played the opening chords of her latest piece on the coffee shop's piano, he joined in with a complementary melody that seemed to complete her thoughts. The other customers in the shop gradually fell silent, drawn in by the spontaneous duet that spoke of something deeper than mere musical collaboration. 'We sound good together,' Alex murmured as the last notes faded away, and Maya felt her cheeks warm at the double meaning in his words. 'We do,' she agreed softly, meeting his gaze. The air between them seemed charged with possibility, and Maya realized that somewhere between the coffee dates and late-night phone calls about chord progressions, she had fallen in love not just with Alex's music, but with Alex himself. When he reached out to tuck a strand of hair behind her ear, she felt her heart racing in a rhythm that matched the beautiful melody they had just created together."
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "title": "The Last Kingdom",
+      "author": "Robert Thornfield",
+      "cover": "https://images.unsplash.com/photo-1519904981063-b0cf448d479e?w=400&h=600&fit=crop",
+      "description": "An epic fantasy tale of magic, kingdoms, and the fight between light and darkness. Young Lyra must embrace her destiny to save the realm of Aethermoor from an ancient evil.",
+      "genre": "Fantasy",
+      "duration": "15h 45m",
+      "rating": 4.9,
+      "reviews": 2341,
+      "pages": 612,
+      "publishYear": 2021,
+      "publisher": "Epic Fantasy Press",
+      "isbn": "978-0-456789-01-2",
+      "language": "English",
+      "isAudioAvailable": true,
+      "isFavorite": true,
+      "tags": ["fantasy", "magic", "adventure", "epic"],
+      "currentProgress": {
+        "chapter": 1,
+        "sentence": 15,
+        "percentage": 12
+      },
+      "chapters": [
+        {
+          "id": 1,
+          "title": "Chapter 1: The Prophecy Awakens",
+          "duration": "65m",
+          "text": "In the realm of Aethermoor, where magic flowed like rivers through the ancient lands, a prophecy spoken centuries ago began to stir with new life. Young Lyra Moonwhisper stood before the Crystal of Eternal Sight, her emerald eyes reflecting the swirling mists within the sacred stone. 'The time has come,' whispered Elder Thorne, his voice heavy with the weight of knowledge passed down through generations. 'The darkness that was banished to the Shadow Realm grows stronger each day, and only one with the pure heart of ancient bloodlines can stand against it.' Lyra felt the magic coursing through her veins, a power she had kept hidden since childhood, now demanding to be acknowledged. The crystal pulsed with ethereal light, showing visions of a kingdom in peril, of shadows creeping across the land like a plague, consuming everything in their path. 'I don't understand,' Lyra whispered, her voice trembling. 'I'm just a village healer. How can I possibly stand against such darkness?' Elder Thorne placed a gentle hand on her shoulder, and she felt the warmth of ancient wisdom flowing from his touch. 'Because, young Moonwhisper, you carry within you the light of the First Realm, the pure magic that existed before the world was torn between light and shadow. The prophecy speaks of one who will unite the scattered kingdoms and restore the balance that was lost.'"
+        },
+        {
+          "id": 2,
+          "title": "Chapter 2: The Gathering Storm",
+          "duration": "58m",
+          "text": "Word of Lyra's awakening spread quickly through the hidden network of those who still believed in the old prophecies. From the Crystal Caves of the North to the Sunfire Forests of the South, magical beings began to emerge from their long exile. Kael the Dragon Rider arrived first, his mighty companion Stormwing casting a shadow over the village as they landed in the square. 'Lady Moonwhisper,' he said with a formal bow, 'the dragons have felt the stirring of the ancient magic. We offer our service in the battle to come.' Next came Aria of the Woodland Realm, her ethereal beauty marking her as one of the last elven princesses. Her forest warriors moved like shadows among the trees, their silver arrows gleaming in the dappled sunlight. 'The trees themselves cry out against the darkness,' she told Lyra. 'Nature itself bends to your call.' As more allies gathered - dwarven smiths with weapons forged from starlight, merfolk from the Deepest Seas bringing news of the darkness spreading beneath the waves - Lyra began to understand the true scope of her destiny. This was not just about saving one kingdom, but about preserving the very essence of magic itself."
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "title": "Digital Shadows",
+      "author": "Alex Morrison",
+      "cover": "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=400&h=600&fit=crop",
+      "description": "A cyberpunk thriller exploring the dark side of technology and virtual reality. Hacker Kai Nakamura uncovers a conspiracy that blurs the line between digital and physical reality.",
+      "genre": "Thriller",
+      "duration": "9h 15m",
+      "rating": 4.3,
+      "reviews": 756,
+      "pages": 378,
+      "publishYear": 2024,
+      "publisher": "Cyber Future Books",
+      "isbn": "978-0-567890-12-3",
+      "language": "English",
+      "isAudioAvailable": true,
+      "isFavorite": false,
+      "tags": ["cyberpunk", "thriller", "technology", "virtual-reality"],
+      "currentProgress": {
+        "chapter": 0,
+        "sentence": 0,
+        "percentage": 0
+      },
+      "chapters": [
+        {
+          "id": 1,
+          "title": "Chapter 1: Virtual Reality",
+          "duration": "48m",
+          "text": "The neon lights of Neo-Tokyo reflected off the rain-slicked streets as hacker Kai Nakamura jacked into the virtual realm known as the Grid. His consciousness dissolved into streams of data, navigating through firewalls and security protocols with the ease of a digital ghost. Tonight's job was supposed to be simple - infiltrate the Synth Corp database and retrieve classified information about their latest neural implant project. But as Kai delved deeper into the corporate maze of encrypted data, he realized he had stumbled upon something far more sinister than corporate espionage. Hidden beneath layers of code was evidence of human experimentation, of minds trapped forever in virtual prisons. 'What have you found, old friend?' came a voice through his neural link - his partner Maya, monitoring his progress from the outside world. 'Something that's going to change everything we thought we knew about virtual reality,' Kai replied, his digital form trembling as he uncovered the dark truth. The files he was reading spoke of a project called 'Digital Immortality' - a way to upload human consciousness permanently into the Grid, but at the cost of their physical bodies. Worse still, the test subjects weren't volunteers. They were people who had simply vanished from the streets of Neo-Tokyo, their disappearances covered up by corrupted officials."
+        },
+        {
+          "id": 2,
+          "title": "Chapter 2: Ghost in the Machine",
+          "duration": "52m",
+          "text": "Kai's hands shook as he disconnected from the Grid, the weight of his discovery threatening to overwhelm him. Maya rushed to his side, concern etched on her face as she helped him remove the neural interface headset. 'Kai, what happened in there? Your vitals went crazy for a moment.' He looked at her with haunted eyes, still processing what he had learned. 'Maya, they're not just experimenting with virtual reality. They're harvesting souls.' He explained what he had found - the Digital Immortality project, the missing people, the conspiracy that reached into the highest levels of government and corporate power. 'We have to expose this,' Maya said, but Kai shook his head grimly. 'It's not that simple. Half the evidence is trapped in the Grid, and the other half is protected by people who will kill to keep it secret.' As if summoned by his words, the lights in their hideout suddenly went out. Through the window, Kai could see black vehicles surrounding their building. 'They found us,' he whispered. 'Maya, we need to get back into the Grid. It's the only place we might be safe.' But as they prepared to jack in, Kai couldn't shake the feeling that the virtual world might be even more dangerous than the physical one they were trying to escape."
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "title": "Moonlight Serenade",
+      "author": "Catherine Blake",
+      "cover": "https://images.unsplash.com/photo-1532012197267-da84d127e765?w=400&h=600&fit=crop",
+      "description": "A vampire romance set in modern-day New Orleans. When violinist Sophie meets the mysterious Damien, she discovers a world of supernatural passion and ancient secrets.",
+      "genre": "Paranormal Romance",
+      "duration": "10h 30m",
+      "rating": 4.7,
+      "reviews": 1823,
+      "pages": 423,
+      "publishYear": 2023,
+      "publisher": "Moonlight Romance",
+      "isbn": "978-0-678901-23-4",
+      "language": "English",
+      "isAudioAvailable": true,
+      "isFavorite": false,
+      "tags": ["paranormal", "romance", "vampire", "music"],
+      "currentProgress": {
+        "chapter": 0,
+        "sentence": 0,
+        "percentage": 0
+      },
+      "chapters": [
+        {
+          "id": 1,
+          "title": "Chapter 1: Night Music",
+          "duration": "55m",
+          "text": "The French Quarter came alive at night, but for Sophie Moreau, the real magic happened when she lifted her violin to her chin and let the music flow through the moonlit streets. Street performance wasn't just her job - it was her passion, her calling, her way of connecting with the soul of New Orleans. Tonight, however, felt different. As she played Pachelbel's Canon in D, she noticed a figure standing in the shadows beyond the circle of streetlight where she performed. He was tall, elegantly dressed, with an otherworldly stillness that made her fingers hesitate on the strings. When their eyes met across the cobblestones, Sophie felt a jolt of recognition, though she was certain they had never met. He stepped forward into the light, and she gasped at his ethereal beauty - pale skin that seemed to glow in the moonlight, dark hair that caught the wind despite the still night, and eyes the color of ancient amber. 'Your music,' he said in a voice like velvet over steel, 'it calls to something I thought was long dead.' Sophie found herself unable to look away, her violin forgotten in her hands. 'I'm Damien,' he continued, approaching with fluid grace. 'And I've been waiting a very long time to hear a song like that.'"
+        }
+      ]
+    }
+  ]
+} 
